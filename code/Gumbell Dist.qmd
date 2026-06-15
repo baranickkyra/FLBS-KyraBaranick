@@ -1,0 +1,143 @@
+---
+title: "Gumbell Distribution"
+author: "Kyra Baranick"
+format: docx
+editor: visual
+---
+
+library(dataRetrieval) library(tidyverse)
+
+install.packages("extRemes") library(extRemes)
+
+# Parameter code for discharge = 00060
+
+```{r}
+pCode <- "00060"
+
+siteNumber <- "12363000" #Flathead in C Falls 
+parameterCd <- "00060" # USGS code for discharge (cfs)
+```
+
+# Retrieve daily mean discharge (discharge is always in cfs)
+
+```{r}
+daily <- readNWISdv(siteNumber, parameterCd, startDate = "1900-01-01", endDate = Sys.Date())
+
+daily <- renameNWISColumns(daily)
+```
+
+# Oct 1–Sep 30); or use calendar year if preferred
+
+```{r}
+daily <- daily %>% mutate(waterYear = ifelse(month(Date) >= 10, year(Date) + 1, year(Date)))
+```
+
+# Compute annual maxima
+
+```{r}
+ams <- daily %>% group_by(waterYear) %>% summarize(annual_max = max(Flow, na.rm = TRUE), .groups = "drop")
+```
+
+# View
+
+```{r}
+head(ams)
+
+hist(log(ams$annual_max))
+
+acf(log(ams$annual_max))
+
+plot(ams$waterYear,ams$annual_max)
+
+#Max flood is declining!!!
+
+#fit to gumbel 
+gumbel_fit_ams<- fevd(ams$annual_max, type = "Gumbel") print(gumbel_fit_ams)
+
+#pdf of gumbel
+dg<- function(x, mu, beta){ z<-(x-mu)/beta (1/beta)* exp(-(z+exp(-z))) }
+
+x<-seq(10,150000, by=100)
+
+plot(x, dg(x, mu= 39500, beta=12681))
+
+#cdf of gumbel dg_cdf <- function(x, mu, beta){
+
+exp(-exp(-(x-mu)/beta))
+
+}
+```
+
+#### 
+
+#Max flood is declining!!!
+
+#fit to gumbel gumbel_fit_ams\<- fevd(ams\$annual_max, type = "Gumbel") print(gumbel_fit_ams)
+
+#pdf of gumbel dg\<- function(x, mu, beta){ z\<-(x-mu)/beta (1/beta)\* exp(-(z+exp(-z))) }
+
+x\<-seq(10,150000, by=100)
+
+plot(x, dg(x, mu= 39500, beta=12681))
+
+#cdf of gumbel dg_cdf \<- function(x, mu, beta){
+
+exp(-exp(-(x-mu)/beta))
+
+}
+
+#plot pQ plot(x, 1-dg_cdf(x, mu= 39500, beta=12681))
+
+pQ\<- 1-dg_cdf(x, mu= 39500, beta=12681)
+
+dQ\<- 1e-6\*x\^2.5 #made this up
+
+plot(x, dq) #looks good?
+
+pQ_future\<- 1-dg_cdf(x, mu= 50000, beta=12681) #move future gumbel location to 50Kcfs
+
+##plot them up
+
+plot(x, pQ*dQ, ylim=c(0,500000)) points(x, pQ_future*dQ)
+
+#########Clark Fork for Rachel
+
+siteNumber \<- "12340500" \# Clark Fork parameterCd \<- "00060" \# USGS code for discharge (cfs)
+
+\# Retrieve daily mean discharge (discharge is always in cfs) daily \<- readNWISdv(siteNumber, parameterCd, startDate = "1900-01-01", endDate = Sys.Date())
+
+daily \<- renameNWISColumns(daily)
+
+\# Extract water year (Oct 1–Sep 30); or use calendar year if preferred daily \<- daily %\>% mutate(waterYear = ifelse(month(Date) \>= 10, year(Date) + 1, year(Date)))
+
+\# Compute annual maxima ams \<- daily %\>% group_by(waterYear) %\>% summarize(annual_max = max(Flow, na.rm = TRUE), .groups = "drop")
+
+\# View head(ams)
+
+hist(log(ams\$annual_max))
+
+acf(log(ams\$annual_max))
+
+plot(ams$waterYear,ams$annual_max)
+
+write.csv(ams, file="/Users/bob.hall/Dropbox/RachelJ/ams.csv")
+
+\#### #Max flood is declining!!!
+
+#########Dec rain on snow pCode \<- "00060"
+
+siteNumber \<- "12358500" \# MF Flathead parameterCd \<- "00060" \# USGS code for discharge (cfs)
+
+\# Retrieve daily mean discharge (discharge is always in cfs) daily \<- readNWISdv(siteNumber, parameterCd, startDate = "1900-01-01", endDate = Sys.Date())
+
+daily \<- renameNWISColumns(daily)
+
+\# Extract water year (Oct 1–Sep 30); or use calendar year if preferred daily \<- daily %\>% mutate(waterYear = ifelse(month(Date) \>= 10, year(Date) + 1, year(Date)))
+
+daily \<- daily %\>% mutate(waterYear = ifelse(month(Date) \>= 10, year(Date) + 1, year(Date)), WY_start = make_date(waterYear - 1, 10, 1), wy_day = as.numeric(Date - WY_start) + 1)
+
+##WY 2026 mf_2026\<- read.csv("/Users/bob.hall/Dropbox/USGS value of data/MF_2026.csv") mf_2026$Date<- as.Date(mdy_hms(mf_2026$datetime))
+
+mf_2026_daily\<- mf_2026 %\>% group_by(Date) %\>% summarise( Flow=mean(Flow)) mf_2026_daily \<- mf_2026_daily %\>% mutate(waterYear = ifelse(month(Date) \>= 10, year(Date) + 1, year(Date)), WY_start = make_date(waterYear - 1, 10, 1), wy_day = as.numeric(Date - WY_start) + 1)
+
+ggplot(daily, aes(x=wy_day, y=Flow))+ geom_line(color="black", alpha=0.1)+ geom_line(data=mf_2026_daily, aes(x=wy_day, y=Flow), color="red")+ theme_classic()+ ylim(0,30000)
