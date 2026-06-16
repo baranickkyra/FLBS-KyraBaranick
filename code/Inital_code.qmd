@@ -1,0 +1,123 @@
+---
+title: "Initial code"
+author: "Kyra Baranick"
+format: pdf
+editor: visual
+---
+
+# load Packages
+
+```{r}
+library(dataRetrieval)
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+library(lubridate)
+library(extRemes)
+library(terra)
+library(sf)
+library(writexl)
+```
+
+```{r}
+stationID <- c(
+ "USGS-12355500",
+# Station Name - N F Flathead River nr Columbia Falls MT (MT) 
+ "USGS-12340000",
+#- Blackfoot River near Bonner MT (MT) 
+ "USGS-06289000",
+#Station ID: Little Bighorn River at State Line nr Wyola MT 
+ "USGS-06207500", 
+#Station Name: Clarks Fork Yellowstone River nr Belfry MT 
+ "USGS-13337000"
+#Station name LOCHSA RIVER NR LOWELL ID
+)
+```
+
+# Pulling metadata for each watershed
+
+```{r}
+
+site_info <- read_waterdata_monitoring_location(monitoring_location_id = c("USGS-12355500",
+"USGS-12340000","USGS-06289000", "USGS-06207500","USGS-13337000"),
+  properties = c("monitoring_location_id",
+    "site_type",
+    "drainage_area",
+                                                          "monitoring_location_name"))
+
+knitr::kable(site_info)
+```
+
+```{r}
+#all avlible itme series metadata (when it started and ended)
+ts_available <- read_waterdata_combined_meta(monitoring_location_id = c("USGS-12355500",
+"USGS-12340000","USGS-06289000", "USGS-06207500","USGS-13337000"),
+                                  parameter_code = c("00060", "00010"))
+```
+
+```{r}
+#creating map ofinvestigated gage sites
+library(leaflet)
+
+leaflet_crs <- "+proj=longlat +datum=WGS84" #default leaflet crs
+
+leaflet(data = site_info |> 
+                sf::st_transform(crs = leaflet_crs)) |> 
+    addProviderTiles("CartoDB.Positron") |> 
+    addCircleMarkers(popup = ~monitoring_location_name, 
+                   radius = 0.1,
+                   opacity = 1)
+
+```
+
+# Reading in all daily flow data
+
+```{r}
+daily_flows <- read_waterdata_daily(
+  monitoring_location_id = stationID,
+  parameter_code = "00060",      # discharge
+  statistic_id = "00003",        # mean
+  time = c("1800-10-01", "")
+)
+
+
+```
+
+# Cleaning to only include date, discharge and the site with name mutated
+
+```{r}
+daily_clean <- daily_flows %>%
+  select(
+    site_id = monitoring_location_id,
+    date = time,
+    discharge_cfs = value
+  )
+
+daily_clean <- daily_clean %>%
+  mutate(site_name = site_info$monitoring_location_name[match(site_id, site_info$monitoring_location_id)])
+
+#adding water yera column
+daily_clean <- daily_clean %>%
+  mutate(
+    date = as.Date(date),
+    watyear = if_else(
+      month(date) >= 10,
+      year(date) + 1,
+      year(date)
+    )
+  )
+
+
+
+```
+
+#  Extract Annual Maxima
+
+```{r}
+
+annual_max <- daily_clean %>%
+  group_by(site_id, site_name, watyear) %>%
+  slice_max(discharge_cfs, with_ties = FALSE) %>%
+  ungroup()
+
+```
