@@ -118,6 +118,13 @@ daily_clean <- daily_clean %>%
 annual_max <- daily_clean %>%
   group_by(site_id, site_name, watyear) %>%
   slice_max(discharge_cfs, with_ties = FALSE) %>%
+  mutate(discharge_m3s = discharge_cfs * 0.0283168) %>%
   ungroup()
+
+```
+
+# Make Gumbel Curve
+
+```{r}
 
 ```
