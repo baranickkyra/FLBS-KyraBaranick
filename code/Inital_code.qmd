@@ -5,7 +5,7 @@ format: pdf
 editor: visual
 ---
 
-# load Packages
+# Load Packages
 
 ```{r}
 library(dataRetrieval)
@@ -21,12 +21,20 @@ library(writexl)
 
 ```{r}
 stationID <- c(
+"USGS-13011000", 
+#Snake River NR Morgan WY 
+"USGS-13296500",
+#SALMON RIVER BL YANKEE FORK NR CLAYTON ID 
+"USGS-06188000",
+#Lamar River nr Tower Ranger Station YNP 
+"USGS-09188500",
+#GREEN RIVER AT WARREN BRIDGE, NEAR DANIEL, WY 
+"USGS-13336500",
+#SELWAY RIVER NR LOWELL ID
  "USGS-12355500",
-# Station Name - N F Flathead River nr Columbia Falls MT (MT) 
- "USGS-12340000",
-#- Blackfoot River near Bonner MT (MT) 
- "USGS-06289000",
-#Station ID: Little Bighorn River at State Line nr Wyola MT 
+ # Station Name - N F Flathead River nr Columbia Falls MT (MT) 
+ "USGS-12414500",
+#ST JOE RIVER AT CALDER ID 
  "USGS-06207500", 
 #Station Name: Clarks Fork Yellowstone River nr Belfry MT 
  "USGS-13337000"
@@ -38,8 +46,26 @@ stationID <- c(
 
 ```{r}
 
-site_info <- read_waterdata_monitoring_location(monitoring_location_id = c("USGS-12355500",
-"USGS-12340000","USGS-06289000", "USGS-06207500","USGS-13337000"),
+site_info <- read_waterdata_monitoring_location(monitoring_location_id = c(
+"USGS-13011000", 
+#Snake River NR Morgan WY 
+"USGS-13296500",
+#SALMON RIVER BL YANKEE FORK NR CLAYTON ID 
+"USGS-06188000",
+#Lamar River nr Tower Ranger Station YNP 
+"USGS-09188500",
+#GREEN RIVER AT WARREN BRIDGE, NEAR DANIEL, WY 
+"USGS-13336500",
+#SELWAY RIVER NR LOWELL ID
+ "USGS-12355500",
+ # Station Name - N F Flathead River nr Columbia Falls MT (MT) 
+ "USGS-12414500",
+#ST JOE RIVER AT CALDER ID 
+ "USGS-06207500", 
+#Station Name: Clarks Fork Yellowstone River nr Belfry MT 
+ "USGS-13337000"
+#Station name LOCHSA RIVER NR LOWELL ID
+),
   properties = c("monitoring_location_id",
     "site_type",
     "drainage_area",
@@ -94,8 +120,9 @@ daily_clean <- daily_flows %>%
   )
 
 daily_clean <- daily_clean %>%
-  mutate(site_name = site_info$monitoring_location_name[match(site_id, site_info$monitoring_location_id)])
-
+  mutate(site_name = site_info$monitoring_location_name[
+      match(site_id, site_info$monitoring_location_id)
+    ],discharge_m3s = discharge_cfs * 0.0283168)
 #adding water yera column
 daily_clean <- daily_clean %>%
   mutate(
@@ -111,7 +138,7 @@ daily_clean <- daily_clean %>%
 
 ```
 
-#  Extract Annual Maxima
+# Extract Annual Maxima
 
 ```{r}
 
@@ -125,6 +152,121 @@ annual_max <- daily_clean %>%
 
 # Make Gumbel Curve
 
+## Start with the functions
+
 ```{r}
+gumbel_pdf <- function(x, mu = 0, beta = 1) {
+  if (beta <= 0) stop("Scale parameter beta must be > 0")
+  z <- (x - mu) / beta
+  (1 / beta) * exp(-(z + exp(-z)))
+}
+gumbel_cdf <- function(x, mu = 0, beta = 1) {
+  exp(-exp(-(x - mu) / beta))
+}
+
+```
+
+# Make Flood Freq. Curve
+
+```{r}
+floodfreq_daily <- daily_clean %>%
+  filter(discharge_m3s > 1) %>%        # remove zero/negative flows
+  group_by(site_name) %>%
+  arrange(desc(discharge_m3s)) %>%
+  mutate(
+    m = row_number(),
+    years = n_distinct(watyear),       # number of water years in record
+    P = m / (years + 1),               # exceedance probability
+    T = 1 / P                          # return period in YEARS
+  ) %>%
+  ungroup()
+
+
+```
+
+## plotting with log scales
+
+```{r}
+ggplot(floodfreq_daily, aes(x = T, y = log(discharge_m3s), color = site_name)) +
+  scale_x_log10() +
+  geom_point(alpha = 0.2, size = 1.0) +
+  geom_line(alpha = 0.7) +
+  labs(
+    x = "Return Period (years)",
+    y = "ln(Discharge m³/s)",
+    title = "Daily-Value Flood Frequency Curves (Natural Log Scale)"
+  ) +
+  theme_bw()
+
+
+```
+
+# Simple Time Series
+
+```{r}
+ library(ggplot2)
+ 
+ggplot(
+  annual_max, aes(x = discharge_m3s))+
+  geom_histogram()+
+  facet_wrap (~site_name, scales = "free_y")
+)
+
+```
+
+```{r}
+ggplot(
+  annual_max, aes(x = watyear, y = discharge_m3s))+
+  geom_point()+
+  facet_wrap (~site_name, scales = "free_y")
+```
+
+# Slope of annual snow melt season vs time (this needs work)
+
+```{r}
+daily_clean_manipulated <- daily_clean %>%
+  mutate(doy = yday(date)) %>%                 # add day of year
+  filter(doy >= 0, doy <= 365) %>%            # melt season
+  group_by(site_name, watyear) %>%
+  arrange(date) %>%
+  mutate(dQ = discharge_m3s - lag(discharge_m3s)) %>%  # daily change
+  filter(dQ > 0) %>%                            # rising days only
+  summarise(rise_slope = mean(dQ, na.rm = TRUE)) %>%
+  ungroup()
+
+```
+
+```{r}
+ggplot(daily_clean_manipulated, aes(watyear, rise_slope)) +
+  geom_point(alpha = 0.6) +
+  geom_smooth(method = "lm", se = FALSE, color = "red") +
+  facet_wrap(~ site_name, scales = "free_y") +
+  labs(
+    x = "Water Year",
+    y = "Mean Rising-Limb Slope (m3s/day)",
+    title = "Snowmelt Rising-Limb Slope Trends Across Sites"
+  )
+
+```
+
+# Peak dates over time 
+
+```{r}
+
+annual_max <- annual_max %>%
+  mutate(
+    wy_start = as.Date(paste0(watyear - 1, "-10-01")),
+    daywatyear = as.numeric(date - wy_start) + 1
+  )
+
+ggplot(annual_max, aes(x = watyear, y = daywatyear)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, color = "red") +
+  facet_wrap(~ site_name, scales = "free_y") +
+  labs(
+    title = "Earlier Snowmelt Peak Over Time",
+    x = "Water Year",
+    y = "Day of Water Year of Peak Flow"
+  )
 
 ```
