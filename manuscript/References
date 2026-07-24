@@ -1,0 +1,155 @@
+@article{dudley2017trends,
+  title={Trends in snowmelt-related streamflow timing in the conterminous United States},
+  author={Dudley, Robert W and Hodgkins, Glenn A and McHale, MR and Kolian, Michael J and Renard, Benjamin},
+  journal={Journal of Hydrology},
+  volume={547},
+  pages={208--221},
+  year={2017},
+  publisher={Elsevier}
+}
+@article{stewart2004changes,
+  title={Changes in snowmelt runoff timing in western North America under abusiness as usual'climate change scenario},
+  author={Stewart, Iris T and Cayan, Daniel R and Dettinger, Michael D},
+  journal={Climatic Change},
+  volume={62},
+  number={1},
+  pages={217--232},
+  year={2004},
+  publisher={Springer}
+}
+@article{https://doi.org/10.1029/1999WR900090,
+author = {Serreze, Mark C. and Clark, Martyn P. and Armstrong, Richard L. and McGinnis, David A. and Pulwarty, Roger S.},
+title = {Characteristics of the western United States snowpack from snowpack telemetry (SNOTEL) data},
+journal = {Water Resources Research},
+volume = {35},
+number = {7},
+pages = {2145-2160},
+doi = {https://doi.org/10.1029/1999WR900090},
+url = {https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/1999WR900090},
+eprint = {https://agupubs.onlinelibrary.wiley.com/doi/pdf/10.1029/1999WR900090},
+abstract = {Daily station data from U.S. Department of Agriculture snowpack telemetry (SNOTEL) archives through the 1995/1996 season are used to examine the climatic characteristics of snow water equivalent (SWE) for the mountainous western United States and linkages with precipitation (PRE) and temperature. Quality control procedures were developed to screen outliers in each variable. SWE for April 1 at the SNOTEL sites compares favorably with colocated snow course values. Regional differences in the seasonal cycle of SWE are discussed in terms of winter-half precipitation, temperature, and the corresponding SWE/PRE ratio. The percentage of annual precipitation represented by snowfall is highest for the Sierra Nevada (67\%), northwestern Wyoming (64\%), Colorado (63\%), and Idaho/western Montana (62\%) sectors, manifesting high SWE/PRE ratios and winter-half precipitation maxima. Lower percentages for the Pacific Northwest (50\%) and Arizona/New Mexico (39\%) reflect lower ratios and, especially for the latter region, a larger fraction of PRE falling outside of the accumulation season. Interannual variability in SWE in the colder inland regions is primarily controlled by available precipitation. For the warmer Pacific coast regions and Arizona/New Mexico the more important factor is the SWE/PRE ratio, illustrating the sensitivity of these areas to climate change.},
+year = {1999}
+}
+
+@article{zheng2018predictive,
+  title={Predictive contributions of snowmelt and rainfall to streamflow variations in the Western United States},
+  author={Zheng, Xiaohui and Wang, Qiguang and Zhou, Lihua and Sun, Qing and Li, Qi},
+  journal={Advances in Meteorology},
+  volume={2018},
+  number={1},
+  pages={3765098},
+  year={2018},
+  publisher={Wiley Online Library}
+}
+@article{benke1990perspective,
+  title={A perspective on America's vanishing streams},
+  author={Benke, Arthur C},
+  journal={Journal of the North American Benthological Society},
+  volume={9},
+  number={1},
+  pages={77--88},
+  year={1990},
+  publisher={North American Benthological Society}
+}
+@article{o2022regional,
+  title={Regional trends in snowmelt timing for the western United States throughout the MODIS era},
+  author={O’Leary III, Donal S and Hall, Dorothy K and DiGirolamo, Nicolo E and Riggs, George A},
+  journal={Physical Geography},
+  volume={43},
+  number={3},
+  pages={285--307},
+  year={2022},
+  publisher={Taylor \& Francis}
+}
+@article{hall2015detection,
+  title={Detection of earlier snowmelt in the Wind River Range, Wyoming, using Landsat imagery, 1972--2013},
+  author={Hall, Dorothy K and Crawford, Christopher J and DiGirolamo, Nicolo E and Riggs, George A and Foster, James L},
+  journal={Remote Sensing of Environment},
+  volume={162},
+  pages={45--54},
+  year={2015},
+  publisher={Elsevier}
+}
+@article{price1978mountains,
+  title={Mountains of the Pacific Northwest, USA: A Study in Contrasts∗},
+  author={Price, Larry W},
+  journal={Arctic and Alpine Research},
+  volume={10},
+  number={2},
+  pages={465--478},
+  year={1978},
+  publisher={Taylor \& Francis}
+}
+@article{beniston2003climatic,
+  title={Climatic change in mountain regions: a review of possible impacts},
+  author={Beniston, Martin},
+  journal={Climatic change},
+  volume={59},
+  number={1},
+  pages={5--31},
+  year={2003},
+  publisher={Springer}
+}
+@misc{googleearth,
+  author       = {Google},
+  title        = {Google Earth Pro},
+  year         = {2026},
+  howpublished = {\url{https://earth.google.com/}},
+  note         = {Accessed: 2026-06-24}
+}
+@misc{usgs_streamstats,
+  author       = {U.S. Geological Survey},
+  title        = {StreamStats: A U.S. Geological Survey Web Application},
+  year         = {2026},
+  howpublished = {\url{https://streamstats.usgs.gov/}},
+  note         = {Accessed: 2026-06-24}
+}
+@article{HarpoldSnowmelt,
+author = {Harpold, A. A. and Kohler, M.},
+title = {Potential for Changing Extreme Snowmelt and Rainfall Events in the Mountains of the Western United States},
+journal = {Journal of Geophysical Research: Atmospheres},
+volume = {122},
+number = {24},
+pages = {13,219-13,228},
+keywords = {precipitation intensity, intensity duration frequency, snowmelt, extreme precipitation, mountain hydrology, hazards},
+doi = {https://doi.org/10.1002/2017JD027704},
+@article{musselman2018projected,
+  title={Projected increases and shifts in rain-on-snow flood risk over western North America},
+  author={Musselman, Keith N and Lehner, Flavio and Ikeda, Kyoko and Clark, Martyn P and Prein, Andreas F and Liu, Changhai and Barlage, Mike and Rasmussen, Roy},
+  journal={Nature Climate Change},
+  volume={8},
+  number={9},
+  pages={808--812},
+  year={2018},
+  publisher={Nature Publishing Group UK London}
+}
+@article{pederson2011climatic,
+  title={Climatic controls on the snowmelt hydrology of the northern Rocky Mountains},
+  author={Pederson, Gregory T and Gray, Stephen T and Ault, Toby and Marsh, Wendy and Fagre, Daniel B and Bunn, Andrew G and Woodhouse, Connie A and Graumlich, Lisa J},
+  journal={Journal of Climate},
+  volume={24},
+  number={6},
+  pages={1666--1687},
+  year={2011}
+}
+@misc{arcgis_experience_2026,
+  author       = {Esri},
+  title        = {ArcGIS Experience: {2b84b8786f5a4dea83c28debbe018be9}},
+  year         = {2026},
+  howpublished = {\url{https://experience.arcgis.com/experience/2b84b8786f5a4dea83c28debbe018be9}},
+  note         = {Accessed: 2026-07-01}
+}
+@article{RSTransition,
+author = {Klos, P. Zion and Link, Timothy E. and Abatzoglou, John T.},
+title = {Extent of the rain-snow transition zone in the western U.S. under historic and projected climate},
+journal = {Geophysical Research Letters},
+volume = {41},
+number = {13},
+pages = {4560-4568},
+keywords = {precipitation phase, rain-snow transition, rain snow transition, climate change},
+doi = {https://doi.org/10.1002/2014GL060500},
+url = {https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1002/2014GL060500},
+eprint = {https://agupubs.onlinelibrary.wiley.com/doi/pdf/10.1002/2014GL060500},
+abstract = {Abstract This study investigates the extent of the rain-snow transition zone across the complex terrain of the western United States for both late 20th century climate and projected changes in climate by the mid-21st century. Observed and projected temperature and precipitation data at 4 km resolution were used with an empirical probabilistic precipitation phase model to estimate and map the likelihood of snow versus rain occurrence. This approach identifies areas most likely to undergo precipitation phase change over the next half century. At broad scales, these projections indicate an average 30\% decrease in areal extent of winter wet-day temperatures conducive to snowfall over the western United States. At higher resolution scales, this approach identifies existing and potential experimental sites best suited for research investigating the mechanisms linking precipitation phase change to a broad array of processes, such as shifts in rain-on-snow flood risk, timing of water resource availability, and ecosystem dynamics.},
+year = {2014}
+}

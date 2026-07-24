@@ -1,7 +1,24 @@
 ---
-title: "SiteJustification"
-format: pdf
+title: "Supplementary Materials"
+author: "Kyra Baranick"
+
+bibliography: references.bib
+
+format:
+  pdf:
+    pdf-engine: xelatex
+    documentclass: article
+    geometry: margin=1in
+    fontsize: 12pt
+  docx: default
+
+execute:
+  echo: false
+  warning: false
+  message: false
 ---
+
+# Supplementary Material A: Site Justification
 
 # Selection Method
 
@@ -13,7 +30,7 @@ format: pdf
 
 -   Gage must continue to record data as of 2026
 
--   No partial record gage (partial record gage: only measures peak or low flows season)
+-   No partial record gage (partial record gauge: only measures peak or low flows season)
 
 -   Most upstream age that satisfies the above measures is selected.
 
@@ -21,11 +38,11 @@ format: pdf
 
 1.  **"USGS-06043500", Gallatin River (At Gallatin Gatway, MT)**
 
-    -   Regulation: USGS stream stats regulation check returns a 1.33% regulation in the watershed upstream of the gage [@misc{usgs_streamstat].
+    -   Regulation: USGS Stream Stats regulation check returns a 1.33% regulation in the watershed upstream of the gage [@misc{usgs_streamstat].
     -   NWIS Discharge period of record : 08/01/1989 - 06/23/2026 (Present)
     -   Drainage Area: 2121km^2^ (819 miles^2^)
     -   Agricultural Land in Percentage of Drainage Area: 0%
-    -   This is the 5th gage from the head waters. The previous 4 gages are decommissioned, recently implemented or have incomplete/partial periods of record. This basin drains part of Yellowstone and Gallatin National Forest.
+    -   This is the 5th gauge from the head waters. The previous 4 gages are decommissioned, recently implemented or have incomplete/partial periods of record. This basin drains part of Yellowstone and Gallatin National Forest.
 
 2.  **"USGS-12332000", Middle Fork Rock Creek (Near Philipsburg, MT)**
 
@@ -53,11 +70,11 @@ format: pdf
 
 5.  **"USGS-12358500", Middle Fork Flathead River(Near West Glacier, MT)**
 
-    -    Regulation: USGS Stream Stats regulation check returns a 0.00% regulation in the watershed upstream of the gage [@misc{usgs_streamstat].
+    -   Regulation: USGS Stream Stats regulation check returns a 0.00% regulation in the watershed upstream of the gage [@misc{usgs_streamstat].
     -   NWIS Discharge period of record : 10/01/1939 - 06/23/2026 (Present) -
     -   Drainage area: 2194 km^2^ (1125 miles^2^)
     -   Agricultural Land in Percentage of Drainage Area: 0%
-    -    This gage is 10 gages from the most upstream gage, however, all previous 9 gages are decommissioned, recently implemented or have incomplete or partial periods of record. This is downstream of lake McDonald and downstream of the confluence between McDonald Creek and Middle Fork Flathead River. The drainage area includes part of Glacier National Forest, Flathead National Forest, Great Bear Wilderness and as far as the Sawtooth Mountain Range.
+    -   This gage is 10 gages from the most upstream gage, however, all previous 9 gages are decommissioned, recently implemented or have incomplete or partial periods of record. This is downstream of lake McDonald and downstream of the confluence between McDonald Creek and Middle Fork Flathead River. The drainage area includes part of Glacier National Forest, Flathead National Forest, Great Bear Wilderness and as far as the Sawtooth Mountain Range.
 
 6.  **"USGS-06188000", Lamar River (Near Tower Ranger Station, WY)**
 
