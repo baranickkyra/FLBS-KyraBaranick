@@ -84,7 +84,7 @@ A complete list of gages with corresponding drainage area, regulation status, la
 library(dplyr)
 library(gt)
 
-site_info1 <- readRDS("site_info1.rds")
+site_info1 <- readRDS("images/site_info1.rds")
 
 site_info1 <- site_info1 |>
   rename(`Drainage Area (km²)` = `Drainage Area (km^2^)`)
