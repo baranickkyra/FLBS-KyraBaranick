@@ -62,11 +62,11 @@ Model evaluation objective:
 
 This study makes several contributions to the understanding of flood hydrology. A common way to analyze trends is to analyze each river independently, what we refer to here as the non-hierarchical, river-by-river analysis. However, streamflow data is highly sensitive to noise, meaning that treating each river as its own independent data set may reflect random fluctuation rather than true change over time. The Bayesian hierarchical model partially pools this information and assumes rivers share the same distribution, as they come from similar climatic regions. This dramatically decreases the influence of noise from the observation level and allows us to evaluate the underlying pattern of hydrologic change over time.
 
-A comprehensive review of Bayesian methods in hydrology highlights this model as the cornerstone of modern hydrological modeling due to the capacity to handle uncertainties in data \[@haddad2025comprehensive\]. Evaluating a river-by river regression with the Bayesian hierarchical regression reveals whether the individual trends are adequate indicators of regional change or whether hierarchical pooling is necessary to extract the climate driven signal.
+A comprehensive review of Bayesian methods in hydrology highlights this model as the cornerstone of modern hydrological modeling due to the capacity to handle uncertainties in data [@haddad2025comprehensive]. Evaluating a river-by river regression with the Bayesian hierarchical regression reveals whether the individual trends are adequate indicators of regional change or whether hierarchical pooling is necessary to extract the climate driven signal.
 
 ### Study area
 
-This study focuses on the Intermountain West, specifically Montana, Idaho and northern Wyoming. The major mountain ranges involved include the Abasroka-Beartooth Mountains, Gallatin Range, Bitterroot Range, Clearwater Mountains, and the Lewis and Livingston Ranges with gauge elevation at about 400-2000m above sea level. The sampled area was limited to mountains west of the Cascades, as the climate in the Northern U.S. Rocky Mountain region is more continental, with a larger annual average temperature range of about 5C larger then the coastal western ranges. [@price1978mountains]. It is estimated that over 50% and as high as 80% of the annual stream discharge originates as snow[@zheng2018predictive ; @pederson2011climatic].
+This study focuses on the Intermountain West, specifically Montana, Idaho and northern Wyoming. The major mountain ranges involved include the Abasroka-Beartooth Mountains, Gallatin Range, Bitterroot Range, Clearwater Mountains, and the Lewis and Livingston Ranges with gauge elevation at about 400-2000m above sea level. The sampled area was limited to mountains west of the Cascades, as the climate in the Northern U.S. Rocky Mountain region is more continental, with a larger annual average temperature range of about 5C larger then the coastal western ranges. [@price1978mountains]. It is estimated that over 50% and as high as 80% of the annual stream discharge originates as snow[@zheng2018predictive; @pederson2011climatic].
 
 Many U.S rivers are a part of a dammed – or in other ways altered system – to manage water supply and protect cities and ecosystems from extreme high and low flows. However, the mountainous western portion of free-flowing river reaches can provide insights into the effects of climate change, with minimal direct human influence on streamflow timing and quantity.
 
@@ -76,7 +76,7 @@ Many U.S rivers are a part of a dammed – or in other ways altered system – t
 
 ### Data
 
-Daily and Instantaneous stream gage data was retrieved from United States Geologic Survey (USGS) and sites were hand selected using USGS Stream Stats, an information and interactive map service [@usgs_streamstats]. Rivers and streams were selected in free-flowing watersheds that drain mountainous regions of the Northwestern United States. Watersheds that contained dams, diversions, flow-altering infrastructure or agricultural land greater then 1% of drainage area, were not eligible for this study. On each identified river, the most upstream stream gage that began operation before 1950 and is still in operation as of 2026 was selected. All selected sites began operation between 1888 and 1954. Years that contained fewer than 300 days were excluded form the analysis.
+Daily and Instantaneous stream gage data was retrieved from United States Geologic Survey (USGS) and sites were hand selected using USGS Stream Stats, an information and interactive map service [@usgs_streamstats]. Rivers and streams were selected in free-flowing watersheds that drain mountainous regions of the northwestern United States. Watersheds that contained dams, diversions, flow-altering infrastructure or agricultural land greater then 1% of drainage area, were not eligible for this study. On each identified river, the most upstream stream gage that began operation before 1950 and is still in operation as of 2026 was selected. All selected sites began operation between 1888 and 1954. Years that contained fewer than 300 days were excluded form the analysis.
 
 A complete list of gages with corresponding drainage area, regulation status, land cover, and period‑of‑record metadata is provided in Appendix A.
 
@@ -189,7 +189,7 @@ $$
 
 ## Results
 
-![Posterior slope probability density histogram for center of mass (COM), day of water year containing annual peak flow (DWY), and discharge, based on 1000 posterior draws. Horizontal segments across the x-axis represent the 90% confidence interval for each model and the dot represents the posterior mean slope. The red vertical line is the zero threshold, meaning no positive or negative slope. This visualization highlights the difference in slope and confidence among the modeled variables with discharge exhibiting a tightly constrained slope near zero and the DWY and COM showing a stronger negative slope.](post_all.png){fig-align="center"}
+![Posterior slope probability density histogram for center of mass (COM), day of water year containing annual peak flow (DWY), and discharge, based on 1000 posterior draws. Horizontal segments across the x-axis represent the 90% confidence interval for each model and the dot represents the posterior mean slope. The red vertical line is the zero threshold, meaning no positive or negative slope. This visualization highlights the difference in slope and confidence among the modeled variables with discharge exhibiting a tightly constrained slope near zero and the DWY and COM showing a stronger negative slope.](png/post_all.png){fig-align="center"}
 
 ### Timing: DWY (containing peak discharge), Center of Mass (50% of total discharge)
 
@@ -205,11 +205,11 @@ Using the day of peak annual discharge variable as an example, we contrast the r
 
 When examining data from the DWY that peak discharge occurs, it is clear that the observation level data is highly variable (Figure 2). When fitting a linear regression line to these points, it is unclear whether the slope is a product of data noise or true change over time. The linear model can also lead to overfitting especially when the record of data contain large gaps. In several rivers such as the St. Regis River, and the North Fork Sun River the data contains two period of large data gaps and several outliers that steepen the river specific slope estimate. In other rivers, such as the Green River and the Selway river, the data appear in a cloud shape around the regression line – making the slope estimate quite uncertain and difficult to interpret.
 
-![Time Series for day of the water year (DWY) that the peak annual discharge occurs. The individual observations of DWY are plotted fit with simple linear regression lines (blue). All slopes are negative with the exception of the Boulder river.](DoY_timeseries.png){fig-align="center"}
+![Time Series for day of the water year (DWY) that the peak annual discharge occurs. The individual observations of DWY are plotted fit with simple linear regression lines (blue). All slopes are negative with the exception of the Boulder river.](png/DoY_timeseries.png){fig-align="center"}
 
 Treating these rivers as a interconnected system draws meaning from this noise and makes the slope estimate interperitable. The river-by-river non-hierarchical model contains variable slope estimations and large confidence intervals, over half of which cross zero, indicating the directional trend is indistinguishable. In contrast, the Bayesian hierarchical model produces a narrower distribution of slopes and smaller uncertainty across rivers. This pattern reflects shrinkage, where rivers with gaps or noisy observations are pulled towards the regional mean.
 
-![Comparison of river level slope estimates for the day of water year (DWY) containing the annual peak flow from the non-hierarchical linear model (red) and the Bayesian hierarchical model (blue). Points represent the slope estimate for each river and model and 95% confidence intervals are shown.](dwy_slope_comparison.png)
+![Comparison of river level slope estimates for the day of water year (DWY) containing the annual peak flow from the non-hierarchical linear model (red) and the Bayesian hierarchical model (blue). Points represent the slope estimate for each river and model and 95% confidence intervals are shown.](png/dwy_slope_comparison.png)
 
 ## Discussion
 
@@ -227,16 +227,16 @@ We also noticed that many hydrologists use the Manning-Kendall (MK) test [@dudle
 
 It is important to recognize that the Bayesian hierarchical model contains limitations as well but due to \_\_\_\_ is is often able to detect a credible signal while other tests may fail. The greatest advantage of the Bayesian Hierarchical Model is the computation of a full posterior distribution and credible intervals for the certainty of the regional estimate. This model can also be adapted to more complex applications and the model can be updated as new climate and hydrologic data is published [@haddad2025comprehensive].
 
-![all using freqpoly](post_all_line.png)
+![all using freqpoly](png/post_all_line.png)
 
-![Time Series for Day of water year for the Center of Mass of Peak Annual Discharge.](COM_timeseries.png)
+![Time Series for Day of water year for the Center of Mass of Peak Annual Discharge.](png/COM_timeseries.png)
 
-![Comparison of LM vs Bayesian Hierarchical Slopes for COM.](COM_slope_comparison.png){#fig-slope-comparison}
+![Comparison of LM vs Bayesian Hierarchical Slopes for COM.](png/COM_slope_comparison.png){#fig-slope-comparison}
 
 ### Timing: Day of Year of Peak Annual Flow
 
 ### Volume: Annual Peak Discharge in Percent Change per Year
 
-![Time Series for Annual Maximum Discharge.](annual_max_discharge_timeseries.png)
+![Time Series for Annual Maximum Discharge.](png/annual_max_discharge_timeseries.png)
 
-![Comparison of LM vs Bayesian Hierarchical Slopes for Annual Maximum Discharge.](anmax_slope_comparison.png)
+![Comparison of LM vs Bayesian Hierarchical Slopes for Annual Maximum Discharge.](png/anmax_slope_comparison.png)
