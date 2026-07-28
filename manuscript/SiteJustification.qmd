@@ -2,149 +2,149 @@
 
 # Selection Method
 
--   Rivers must be free-flowing. No upstream dams diversions or flow altering infrastructure.
+-   Rivers must be free-flowing with no upstream dams diversions or flow altering infrastructure.
 -   Significant agricultural withdraw upstream disqualifies the gage.
--   Gage record must contain 70+ years worth of data
--   Gage must continue to record data as of 2026
--   No partial record gage (partial record gauge: only measures peak or low flows season)
--   Most upstream age that satisfies the above measures is selected.
+-   Gage record must contain 70+ years worth of data.
+-   Gage must continue to record data as of 2026.
+-   No partial record gages (partial record gage: only measures peak or low flows season).
+-   Most upstream gage that satisfies the above measures is selected.
 
 # Site List and Justification
 
-1.  **"USGS-06043500", Gallatin River (At Gallatin Gatway, MT)**
+1.  **"USGS-06043500", Gallatin River (at Gallatin Gatway, MT)**
 
     -   Regulation: USGS Stream Stats regulation check returns a 1.33% regulation in the watershed upstream of the gage [@usgs_streamstats].
-    -   NWIS Discharge period of record : 08/01/1989 - 06/23/2026 (Present)
-    -   Drainage Area: 2121km^2^ (819 miles^2^)
-    -   Agricultural Land in Percentage of Drainage Area: 0%
+    -   NWIS Discharge period of record: 08/01/1989 - 06/23/2026 (Present)
+    -   Drainage Area: 2121 km^2^ (819 miles^2^)
+    -   Agricultural land in percentage of drainage area: 0%
     -   This is the 5th gauge from the head waters. The previous 4 gages are decommissioned, recently implemented or have incomplete/partial periods of record. This basin drains part of Yellowstone and Gallatin National Forest.
 
-2.  **"USGS-12332000", Middle Fork Rock Creek (Near Philipsburg, MT)**
+2.  **"USGS-12332000", Middle Fork Rock Creek (near Philipsburg, MT)**
 
     -   Regulation: USGS Stream Stats regulation check returns a 0.00% regulation in the watershed upstream of the gage [@usgs_streamstats].
-    -   NWIS Discharge period of record : 10/01/137 - 06/23/2026 (Present)
+    -   NWIS Discharge period of record: 10/01/137 - 06/23/2026 (Present)
     -   Drainage area: 313 km^2^ (121 miles^2^)
-    -   Agricultural Land in Percentage of Drainage Area: 0%
+    -   Agricultural land in percentage of drainage area: 0%
     -   This is the most upstream gage in the watershed. It does not contain any farmland or developed land. The drainage area drains Deerlodge National Forest.
 
-3.  **"USGS-09196500", Pine Creek (Above Freemont Lake, WY)**
+3.  **"USGS-09196500", Pine Creek (above Freemont Lake, WY)**
 
     -   Regulation: No identified regulation or farm areas [@googleearth]
-    -   NWIS Discharge period of record : 10/01/1937 - 06/23/2026 (Present)
-    -   Drainage area: 196km^2^ (76 miles^2^)
-    -   Agricultural Land in Percentage of Drainage Area: 0%
+    -   NWIS Discharge period of record: 10/01/1937 - 06/23/2026 (Present)
+    -   Drainage area: 196 km^2^ (76 miles^2^)
+    -   Agricultural land in percentage of drainage area: 0%
     -   This is the most upstream gage in the watershed. The watershed contains many natural lakes and mountainous terrain. The basin drains Bridger Wilderness and Bridger National Forest and is upstream of Pine Lake.
 
-4.  **"USGS-06090500", Belt Creek (Near Monarch, MT)**
+4.  **"USGS-06090500", Belt Creek (near Monarch, MT)**
 
     -   Regulation: USGS Stream Stats regulation check returns a 0.00% regulation in the watershed upstream of the gage [@usgs_streamstats].
     -   NWIS Discharge period of record: 15/01/1951 - 06/23/2026 (Present)
-    -   Drainage area: 917km^2^ (354 miles^2^)
-    -   Agricultural Land in Percentage of Drainage Area: 0%
+    -   Drainage area: 917 km^2^ (354 miles^2^)
+    -   Agricultural land in percentage of drainage area: 0%
     -   This is the most upstream gage in the watershed. This basin drains Cascade County and Lewis and Clark National Forest.
 
-5.  **"USGS-12358500", Middle Fork Flathead River(Near West Glacier, MT)**
+5.  **"USGS-12358500", Middle Fork Flathead River (near West Glacier, MT)**
 
     -   Regulation: USGS Stream Stats regulation check returns a 0.00% regulation in the watershed upstream of the gage [@usgs_streamstats].
-    -   NWIS Discharge period of record : 10/01/1939 - 06/23/2026 (Present) -
+    -   NWIS Discharge period of record: 10/01/1939 - 06/23/2026 (Present) -
     -   Drainage area: 2194 km^2^ (1125 miles^2^)
-    -   Agricultural Land in Percentage of Drainage Area: 0%
+    -   Agricultural land in percentage of drainage area: 0%
     -   This gage is 10 gages from the most upstream gage, however, all previous 9 gages are decommissioned, recently implemented or have incomplete or partial periods of record. This is downstream of lake McDonald and downstream of the confluence between McDonald Creek and Middle Fork Flathead River. The drainage area includes part of Glacier National Forest, Flathead National Forest, Great Bear Wilderness and as far as the Sawtooth Mountain Range.
 
-6.  **"USGS-06188000", Lamar River (Near Tower Ranger Station, WY)**
+6.  **"USGS-06188000", Lamar River (near Tower Ranger Station, WY)**
 
     -   Regulation: No identified regulation or farm areas [@googleearth].
-    -   NWIS Discharge period of record : 05/01/1923- 06/23/2026 (Present)
+    -   NWIS Discharge period of record: 05/01/1923- 06/23/2026 (Present)
     -   Drainage area: 1730 km^2^ (668 miles^2^)
-    -   Agricultural Land in Percentage of Drainage Area: 0%
+    -   Agricultural land in percentage of drainage area: 0%
     -   This is the most upstream age of the Lamar River. The drainage area is within Yellowstone National Park.
 
-7.  **"USGS-09188500", Green River (At Warren Bridge, near Daniel, WY)**
+7.  **"USGS-09188500", Green River (at Warren Bridge, near Daniel, WY)**
 
     -   Regulation: No identified regulation or farm areas [@googleearth].
-    -   NWIS Discharge period of record : 10/01/1931- 06/23/2026 (Present)
+    -   NWIS Discharge period of record: 10/01/1931- 06/23/2026 (Present)
     -   Drainage area: 1193 km^2^ (461 miles^2^)
-    -   Agricultural Land in Percentage of Drainage Area: 0%
+    -   Agricultural land in percentage of drainage area: 0%
     -   This is the most upstream gage of the Green River. This drains part of the Bridger-Teton National Forest.
 
-8.  **"USGS-13336500", Selway River (Near Lowell, ID)**
+8.  **"USGS-13336500", Selway River (near Lowell, ID)**
 
     -   Regulation: No identified regulation or farm areas [@googleearth].
-    -   NWIS Discharge period of record : 04/11/1911- 06/23/2026 (Present)
+    -   NWIS Discharge period of record: 04/11/1911- 06/23/2026 (Present)
     -   Drainage area: 4962 km^2^ (1915 miles^2^)
-    -   Agricultural Land in Percentage of Drainage Area: 0%
+    -   Agricultural land in percentage of drainage area: 0%
     -   This is the 5th gage from the head waters. The previous 4 gages are decommissioned, recently implemented or have incomplete or partial periods of record. This drainage area drains Selway-Bitterroot National Forest, Bitterroot Wilderness and Nezperce National Forest.
 
 9.  **"USGS-12355500", North Fork Flathead River (Flathead British Colombia, MT)**
 
     -   Regulation: USGS Stream Stats regulation check returns a 0.00% regulation in the watershed upstream of the gage [@usgs_streamstats].
-    -   NWIS Discharge period of record : 04/01/1929- 06/23/2026 (Present)
+    -   NWIS Discharge period of record: 04/01/1929- 06/23/2026 (Present)
     -   Drainage area: 4030 km^2^ (1556 miles^2^)
-    -   Agricultural Land in Percentage of Drainage Area: 0%
+    -   Agricultural land in percentage of drainage area: 0%
     -   This is the most upstream gage form the headwaters. This gage sits of the border of the U.S. and Canada and drains parts of Glacier National Park and Flathead National Forest.
 
 10. **"USGS-12414500", St. Joe River (at Calder, ID)**
 
     -   Regulation: One farm in Herrick, ID [@usgs_streamstats].
-    -   NWIS Discharge period of record : 05/01/1911 - 06/23/2026 (Present)
+    -   NWIS Discharge period of record: 05/01/1911 - 06/23/2026 (Present)
     -   Drainage area: 2654 km^2^ (1025 miles^2^)
-    -   Agricultural Land in Percentage of Drainage Area: .011%
+    -   Agricultural land in percentage of drainage area: 0.011%
     -   This is the 4th gage from the head waters. The previous 3 gages are decommissioned, recently implemented or have incomplete or partial periods of record. This drainage area drains the Saint Joe National Forest near the Bitterroot range.
 
-11. **"USGS-06207500", Clarks Fork Yellowstone River (Near Belfry, MT)**
+11. **"USGS-06207500", Clarks Fork Yellowstone River (near Belfry, MT)**
 
     -   Regulation: USGS Stream Stats regulation check returns a 0.00% regulation in the watershed upstream of the gage [@usgs_streamstats].
-    -   NWIS Discharge period of record : 09/01/1921 - 06/23/2026 (Present)
+    -   NWIS Discharge period of record: 09/01/1921 - 06/23/2026 (Present)
     -   Drainage area: 2983 km^2^ (1152 miles^2^)
-    -   Agricultural Land in Percentage of Drainage Area: 0%
+    -   Agricultural land in percentage of drainage area: 0%
     -   This is the 6th gage from the head waters. The previous 5 gages are decommissioned, recently implemented or have incomplete or partial periods of record. This drainage area drains parts of Yellowstone National Park
 
-12. **"USGS-13337000", Locsha River (Near Lowell, ID)**
+12. **"USGS-13337000", Locsha River (near Lowell, ID)**
 
     -   Regulation: No identified regulation or farm areas [@usgs_streamstats].
-    -   NWIS Discharge period of record : 10/01/1910 - 06/23/2026 (Present)
+    -   NWIS Discharge period of record: 10/01/1910 - 06/23/2026 (Present)
     -   Drainage area: 3048 km^2^ (1177 miles^2^)
-    -   Agricultural Land in Percentage of Drainage Area: 0%
+    -   Agricultural land in percentage of drainage area: 0%
     -   This is the 5th gage from the head waters. The previous 4 gages are decommissioned, recently implemented or have incomplete or partial periods of record. This drainage area drains parts of Clearwater National Forest.
 
-13. **"USGS-06078500",North Fork Sun River (Near Augusta, MT)**
+13. **"USGS-06078500",North Fork Sun River (near Augusta, MT)**
 
     -   Regulation: USGS Stream Stats regulation check returns a 0.00% regulation in the watershed upstream of the gage [@usgs_streamstats].
-    -   NWIS Discharge period of record : 05/01/1911- 06/23/2026 (Present)
+    -   NWIS Discharge period of record: 05/01/1911- 06/23/2026 (Present)
     -   Drainage area: 670 km^2^ (259 miles^2^)
-    -   Agricultural Land in Percentage of Drainage Area: 0%
+    -   Agricultural land in percentage of drainage area: 0%
     -   This is the most upstream gage from the headwaters. This drains part of Lewis and Clark National Forest.
 
-14. **"USGS-06079000", South Fork Sun River (Near Augusta, MT)**
+14. **"USGS-06079000", South Fork Sun River (near Augusta, MT)**
 
     -   Regulation: USGS Stream Stats regulation check returns a 0.00% regulation in the watershed upstream of the gage [@usgs_streamstats].
-    -   NWIS Discharge period of record : 05/01/1911- 06/23/2026 (Present)
+    -   NWIS Discharge period of record: 05/01/1911- 06/23/2026 (Present)
     -   Drainage area: 650 km^2^ (251 miles^2^)
-    -   Agricultural Land in Percentage of Drainage Area: 0%
+    -   Agricultural land in percentage of drainage area: 0%
     -   This is the most upstream gage from the headwaters. This drains part of Lewis and Clark National Forest.
 
-15. **"USGS-16102500", Teton River (Below South Fork near Choteau, MT)**
+15. **"USGS-16102500", Teton River (below South Fork near Choteau, MT)**
 
     -   Regulation: USGS Stream Stats regulation check returns a 0.00% regulation in the watershed upstream of the gage [@usgs_streamstats].
-    -   NWIS Discharge period of record : 06/01/1947- 06/23/2026 (Present)
+    -   NWIS Discharge period of record: 06/01/1947- 06/23/2026 (Present)
     -   Drainage area: 285 km^2^ (110 miles^2^)
-    -   Agricultural Land in Percentage of Drainage Area: 0%
+    -   Agricultural land in percentage of drainage area: 0%
     -   This is the most upstream gage from the headwaters. This drains part of Teton County.
 
-16. **"USGS-05014500", Swiftwater Creek (At Many Glacier, MT)**
+16. **"USGS-05014500", Swiftwater Creek (at Many Glacier, MT)**
 
     -   Regulation: USGS Stream Stats regulation check returns a 0.00% regulation in the watershed upstream of the gage [@usgs_streamstats].
-    -   NWIS Discharge period of record : 06/01/1912- 06/23/2026 (Present)
+    -   NWIS Discharge period of record : 06/01/1912 - 06/23/2026 (Present)
     -   Drainage area: 80 km^2^ (31 miles^2^)
-    -   Agricultural Land in Percentage of Drainage Area: 0%
+    -   Agricultural land in percentage of drainage area: 0%
     -   This is the 5th gage from the head waters. The previous 4 gages are decommissioned, recently implemented or have incomplete or partial periods of record. This drainage area drains parts of Glacier national Park. The gage sits downstream of Swiftcurrent Lake.
 
-17. **"USGS-12354000", St. Regis River (Near St. Regis, MT)**
+17. **"USGS-12354000", St. Regis River (near St. Regis, MT)**
 
     -   Regulation: USGS Stream Stats regulation check returns a 0.00% regulation in the watershed upstream of the gage [@usgs_streamstats].
-    -   NWIS Discharge period of record : 09/01/1910- 06/23/2026 (Present)
+    -   NWIS Discharge period of record: 09/01/1910- 06/23/2026 (Present)
     -   Drainage area: 787 km^2^ (304 miles^2^)
-    -   Agricultural Land in Percentage of Drainage Area: 0%
+    -   Agricultural land in percentage of drainage area: 0%
     -   This is the most upstream gage from the headwaters. This basin drains part of Lolo National Forest.
 
 18. **"USGS-06200000" Boulder River (at Big Creek, MT)**
@@ -152,5 +152,5 @@
     -   Regulation: USGS Stream Stats regulation check returns a 0.00% regulation in the watershed upstream of the gage [@usgs_streamstats].
     -   NWIS Discharge period of record : 04/01/1947- 06/23/2026 (Present)
     -   Drainage area: 1357 km^2^ (524 miles^2^)
-    -   Agricultural Land in Percentage of Drainage Area: 1%
-    -   This is the 5th gage from the head waters. The previous 4 gages are decommissioned, recently implemented or have incomplete or partial periods of record.This basin drains part of Gallatin National Forest and the Absaroka Mountains.
+    -   Agricultural land in percentage of drainage area: 1%
+    -   This is the 5th gage from the head waters. The previous 4 gages are decommissioned, recently implemented or have incomplete or partial periods of record. This basin drains part of Gallatin National Forest and the Absaroka Mountains.
