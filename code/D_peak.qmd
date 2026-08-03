@@ -66,14 +66,14 @@ annual_max_daily <- annual_max_daily %>%
     datetime = as.Date(Date),
     wy_start = as.Date(paste0(watyear - 1, "-10-01")),
     day_wy = as.numeric(Date - wy_start) + 1
-  )
-
+  )|>
 ```
 
 ## Scatter plotting the raw data with model slopes 
 
 ```{r}
-
+# This first plot uses the raw year with priors set
+# you will need to run the "coefficient and regression line calculation" code chunk for this to work 
 ggplot(slopesforplot_3, aes(x = watyear, y = day_wy)) +
  geom_point(alpha = 0.6, size = 1) +
   geom_line(aes(y = pred), color = "darkblue", linewidth = 1) +
@@ -128,6 +128,7 @@ ggplot(slopesforplot_1, aes(x = year_cent)) +
 ## Linear
 
 ```{r}
+# this is the non multilevel slopes and 95CI
 peakdy_lm_fit_nopool <- lm(
   day_wy ~ year_cent * river_name,
   data = annual_max_daily)
@@ -136,6 +137,10 @@ dwy_sum <- summary(emtrends(peakdy_lm_fit_nopool, ~ river_name, var = "year_cent
 ```
 
 ## Hierarchical
+
+```{r}
+annual_max_daily <- readRDS("annual_max_daily.rds")
+```
 
 ```{r}
 # With year centered to 1888 and priors on the intercept 
@@ -169,7 +174,7 @@ dwy_fit3 <- brm(
 )
 ```
 
-```{r}
+```{r, eval=FALSE}
 saveRDS(dwy_fit, "dwy_fit.rds")
 
 ```
@@ -215,7 +220,7 @@ slopesforplot_3 <- annual_max_daily %>%
 ```
 
 ```{r}
-
+# This is to pull the slopes and CI intervals out of the array for plotting agaisnt the non- multilevel model
 dwy_rivers <- as.data.frame.table(dy_coef1[[1]]) %>%
   rename(
     river = Var1,
