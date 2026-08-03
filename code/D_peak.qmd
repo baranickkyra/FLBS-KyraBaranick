@@ -70,11 +70,13 @@ annual_max_daily <- annual_max_daily %>%
 
 ```
 
+## Scatter plotting the raw data with model slopes 
+
 ```{r}
 
-ggplot(annual_max_daily, aes(x = watyear, y = day_wy)) +
+ggplot(slopesforplot_3, aes(x = watyear, y = day_wy)) +
  geom_point(alpha = 0.6, size = 1) +
-  geom_smooth(method = "lm", se = TRUE, color = "darkblue", linewidth = 1) +
+  geom_line(aes(y = pred), color = "darkblue", linewidth = 1) +
   facet_wrap(~ river_name, scales = "free") +
   labs(
     x = "Water Year",
@@ -91,9 +93,9 @@ ggplot(annual_max_daily, aes(x = watyear, y = day_wy)) +
     panel.grid.minor = element_blank(),
     panel.grid.major = element_blank())
  
-ggplot(annual_max_daily, aes(x = year_cent, y = day_wy)) +
- geom_point(alpha = 0.6, size = 1) +
-  geom_smooth(method = "lm", se = TRUE, color = "darkblue", linewidth = 1) +
+ggplot(slopesforplot_1, aes(x = year_cent)) +
+  geom_point(aes(y = day_wy), alpha = 0.6, size = 1) +
+  geom_line(aes(y = pred), color = "darkblue", linewidth = 1) +
   facet_wrap(~ river_name, scales = "free") +
   labs(
     x = "Water Year",
@@ -123,7 +125,7 @@ ggplot(annual_max_daily, aes(x = year_cent, y = day_wy)) +
 
 # BRMS
 
-## linear
+## Linear
 
 ```{r}
 peakdy_lm_fit_nopool <- lm(
@@ -136,7 +138,7 @@ dwy_sum <- summary(emtrends(peakdy_lm_fit_nopool, ~ river_name, var = "year_cent
 ## Hierarchical
 
 ```{r}
-# With year centered 
+# With year centered to 1888 and priors on the intercept 
 dwy_fit1 <- brm(
   day_wy ~ year_cent + (1 + year_cent | river_name),
   data = annual_max_daily,
@@ -147,7 +149,7 @@ dwy_fit1 <- brm(
 ```
 
 ```{r}
-# no priors for intercept (this is what was done before)
+# This is for the raw year with no priors for intercept (this is what was done before)
 dwy_fit2 <-brm(
   day_wy ~ watyear + (1 + watyear | river_name),
  data = annual_max_daily,
@@ -157,7 +159,7 @@ dwy_fit2 <-brm(
 ```
 
 ```{r}
-# This is the uncentered year with normal (250, 1000)
+# This is the raw year with incepcept priors ( normal (250, 1000) )
 dwy_fit3 <- brm(
   day_wy ~ watyear + (1 + watyear | river_name),
   data = annual_max_daily,
@@ -169,13 +171,44 @@ dwy_fit3 <- brm(
 
 ```{r}
 saveRDS(dwy_fit, "dwy_fit.rds")
+
 ```
 
-```{r}
-dy_coef1 <- coef(dwy_fit1)
-dy_coef2 <- coef(dwy_fit2)
-dy_coef3 <- coef(dwy_fit3)
+## coefficient and regression line calculation
 
+```{r}
+####### This is for the centered water year for 1888. Pulling the slope and intecept out of the array, making and equation out of it and then combining it with annual_max_daily so both the slopes and the raw points can be plotted
+dy_coef1 <- coef(dwy_fit1)
+slopeint1 <- tibble(
+  river_name = dimnames(dy_coef1$river_name)[[1]],
+  intercept  = dy_coef1$river_name[, "Estimate", "Intercept"],
+  slope      = dy_coef1$river_name[, "Estimate", "year_cent"]
+)
+slopesforplot_1 <- annual_max_daily %>%
+  left_join(slopeint1, by = "river_name") %>%
+  mutate(pred = intercept + slope * year_cent)
+
+######### This is for the original way it was ran with  raw year and no intercept priors 
+dy_coef2 <- coef(dwy_fit2)
+slopeint2 <- tibble(
+  river_name = dimnames(dy_coef2$river_name)[[1]],
+  intercept  = dy_coef2$river_name[, "Estimate", "Intercept"],
+  slope      = dy_coef2$river_name[, "Estimate", "watyear"]
+)
+slopesforplot_2 <- annual_max_daily %>%
+  left_join(slopeint2, by = "river_name") %>%
+  mutate(pred = intercept + slope * watyear)
+
+######### This is for the original way it was ran with raw year but with intercept priors. 
+dy_coef3 <- coef(dwy_fit3)
+slopeint3 <- tibble(
+  river_name = dimnames(dy_coef3$river_name)[[1]],
+  intercept  = dy_coef3$river_name[, "Estimate", "Intercept"],
+  slope      = dy_coef3$river_name[, "Estimate", "watyear"]
+)
+slopesforplot_3 <- annual_max_daily %>%
+  left_join(slopeint3, by = "river_name") %>%
+  mutate(pred = intercept + slope * watyear)
 
 
 
