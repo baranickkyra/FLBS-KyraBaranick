@@ -1,0 +1,248 @@
+---
+title: "D_peak"
+author: "Kyra Baranick"
+format: pdf
+editor: visual
+---
+
+## D_peak
+
+```{r}
+library("brms")
+library("emmeans")
+library(dataRetrieval)
+library(tidyr)
+library(dplyr)
+library(fasstr)
+library(ggplot2)
+library(lubridate)
+library(extRemes)
+library(terra)
+library(sf)
+library(writexl)
+library(knitr)
+library(kableExtra)
+library(webshot2)
+library(stringr)
+
+daily_flows <- readRDS("daily_flows.rds")
+# dwy_fit <- readRDS("dwy_fit.rds")
+```
+
+## Cleaning
+
+```{r}
+daily_flows <- daily_flows |> 
+  filter(!site_id %in% c("06079000", "06102500" ))
+  
+daily_clean <- daily_flows %>%
+  mutate(
+    site_name = river_name,
+    date = as.Date(Date),
+    watyear = if_else(
+      month(date) >= 10,
+      year(date) + 1,
+      year(date)))
+
+
+daily_clean <- daily_clean %>%
+  mutate(
+    year_cent = watyear - 1888
+  )
+
+```
+
+```{r}
+annual_max_daily <- daily_clean %>%
+  group_by(site_id, site_name, watyear) %>%
+  slice_max(discharge_m3s, with_ties = FALSE) %>% 
+  ungroup()
+```
+
+```{r}
+
+annual_max_daily <- annual_max_daily %>%
+  mutate(
+    datetime = as.Date(Date),
+    wy_start = as.Date(paste0(watyear - 1, "-10-01")),
+    day_wy = as.numeric(Date - wy_start) + 1
+  )
+
+```
+
+```{r}
+
+ggplot(annual_max_daily, aes(x = watyear, y = day_wy)) +
+ geom_point(alpha = 0.6, size = 1) +
+  geom_smooth(method = "lm", se = TRUE, color = "darkblue", linewidth = 1) +
+  facet_wrap(~ river_name, scales = "free") +
+  labs(
+    x = "Water Year",
+    y = "Day of water year continaing peak flow (1-366)",
+    title = "Using year since christ was born"
+  )+
+   theme_bw() +
+  theme(
+    plot.title = element_text(size = 14, ),
+    plot.subtitle = element_text(size = 11),
+    axis.title = element_text(size = 12),
+    axis.text = element_text(size = 9),
+    strip.text = element_text(size = 7, face = "bold"),
+    panel.grid.minor = element_blank(),
+    panel.grid.major = element_blank())
+ 
+ggplot(annual_max_daily, aes(x = year_cent, y = day_wy)) +
+ geom_point(alpha = 0.6, size = 1) +
+  geom_smooth(method = "lm", se = TRUE, color = "darkblue", linewidth = 1) +
+  facet_wrap(~ river_name, scales = "free") +
+  labs(
+    x = "Water Year",
+    y = "Day of water year continaing peak flow (1-366)",
+    title  = "With year centered at 1888"
+  )+
+   theme_bw() +
+  theme(
+    plot.title = element_text(size = 14, ),
+    plot.subtitle = element_text(size = 11),
+    axis.title = element_text(size = 12),
+    axis.text = element_text(size = 9),
+    strip.text = element_text(size = 7, face = "bold"),
+    panel.grid.minor = element_blank(),
+    panel.grid.major = element_blank())
+```
+
+```{r, eval=FALSE}
+ ggsave(
+  filename = "DoY_timeseries.png",
+  plot = DoY_timeseriespng,
+  width = 10,
+  height = 6,
+  dpi = 300
+)
+```
+
+# BRMS
+
+## linear
+
+```{r}
+peakdy_lm_fit_nopool <- lm(
+  day_wy ~ year_cent * river_name,
+  data = annual_max_daily)
+
+dwy_sum <- summary(emtrends(peakdy_lm_fit_nopool, ~ river_name, var = "year_cent"))
+```
+
+## Hierarchical
+
+```{r}
+# With year centered 
+dwy_fit1 <- brm(
+  day_wy ~ year_cent + (1 + year_cent | river_name),
+  data = annual_max_daily,
+  family = gaussian(),
+  prior  = c(prior(normal(250, 50), class = "Intercept"),
+  prior(normal(0, 0.5), class = "b")))
+
+```
+
+```{r}
+# no priors for intercept (this is what was done before)
+dwy_fit2 <-brm(
+  day_wy ~ watyear + (1 + watyear | river_name),
+ data = annual_max_daily,
+  family = "gaussian",
+  prior(normal(0, 0.5), class = "b") )
+
+```
+
+```{r}
+# This is the uncentered year with normal (250, 1000)
+dwy_fit3 <- brm(
+  day_wy ~ watyear + (1 + watyear | river_name),
+  data = annual_max_daily,
+  family = gaussian(),
+  prior(normal(250 ,1000), class = "Intercept"),
+  prior(normal(0, 0.5), class = "b")
+)
+```
+
+```{r}
+saveRDS(dwy_fit, "dwy_fit.rds")
+```
+
+```{r}
+dy_coef1 <- coef(dwy_fit1)
+dy_coef2 <- coef(dwy_fit2)
+dy_coef3 <- coef(dwy_fit3)
+
+
+
+
+```
+
+```{r}
+
+dwy_rivers <- as.data.frame.table(dy_coef1[[1]]) %>%
+  rename(
+    river = Var1,
+    coef_name = Var2,
+    term = Var3,
+    value = Freq
+  ) %>%
+  pivot_wider(
+    names_from = coef_name,
+    values_from = value
+  ) %>%
+  filter(term == "year_cent")
+
+dwy_rivers <- dwy_rivers %>% select(-term)
+
+dwy_sum <- dwy_sum %>%
+  dplyr::rename(
+    river = river_name,
+    Estimate = year_cent.trend,
+    Q2.5 = lower.CL,
+    Q97.5 = upper.CL
+  ) %>%
+  dplyr::mutate(Model = " LM Non-heirchaical")
+
+combinedfordwy <- bind_rows(
+  dwy_sum,
+  dwy_rivers %>% mutate(Model = "Bayesian Heirchaical Model")
+)
+```
+
+```{r}
+ggplot(combinedfordwy, aes(river, Estimate, color = Model)) +
+  geom_point(size = 3, position = position_dodge(width = 0.6)) +
+  geom_errorbar(
+    aes(ymin = Q2.5, ymax = Q97.5),
+    width = 0.2,
+    position = position_dodge(width = 0.6)
+  ) +
+  geom_hline(yintercept = 0, color = "black", linewidth = 1) +
+  coord_cartesian(ylim = c(-0.6, 0.4)) +
+  theme_bw() +
+  labs(
+    x = "",
+    y = "Slope (β1,r)"
+  ) +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1, size = 8),
+    legend.position = "top",
+    legend.title = element_blank(),
+    legend.text = element_text(size = 10),
+    panel.grid = element_blank()
+  )
+```
+
+```{r, eval=FALSE}
+ggsave(
+  "dwy_slope_comparison.png",
+  pngdwy,
+  width = 10,
+  height = 6,
+  dpi = 300
+)
+```
